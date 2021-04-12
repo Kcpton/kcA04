@@ -9,7 +9,11 @@ Allows files to be inserted into the tree as well
 
 #include <assert.h>
 #include <string.h>
+#include <stdlib.h>
 #include "ft.h"
+#include "dynarray.h"
+#include "file.h"
+#include "node.h"
 
 /* Remember to write some comment here, dumbass*/
 static boolean isInitialized;
@@ -50,7 +54,7 @@ int FT_insertDir(char *path)
          free(currentPath);
          return NOT_A_DIRECTORY;
       }
-      if(Node_getLocation(currentNode, currentPath, loc) == 0;)
+      if(Node_getLocation(currentNode, currentPath, loc) == 0)
       {
          if(Node_addChild(currentNode, currentPath, *loc) != SUCCESS)
          {
@@ -198,11 +202,6 @@ int FT_insertFile(char *path, void *contents, size_t length)
       }
       if(Node_getLocation(currentNode, currentPath, loc) == 0;)
       {
-         if(newNode = NULL)
-         {
-            free(currentPath);
-            return MEMORY_ERROR;
-         }
          if(Node_addChild(currentNode, currentPath, *loc) != SUCCESS)
          {
             free(currentPath);
@@ -225,7 +224,7 @@ int FT_insertFile(char *path, void *contents, size_t length)
       free(currentPath);
       return ALREADY_IN_TREE;
    }
-   return File_insert(currentNode, currentPath);
+   return File_insert(currentNode, currentPath, contents);
 }
 
 boolean FT_containsFile(char *path)
@@ -449,7 +448,6 @@ int FT_init(void)
       return INITIALIZATION_ERROR;
    isInitialized = 1;
    root = NULL;
-   count = 0;
    return SUCCESS;
 }
 
@@ -458,11 +456,9 @@ int FT_destroy(void)
    if(!isInitialized)
       return INITIALIZATION_ERROR;
    assert(root != NULL);
-   countDirectories -= Node_destroy(root);
+   Node_destroy(root);
    root = NULL;
    isInitialized = 0;
-   assert(countDirectories == 0);
-   countFiles = 0;
    return SUCCESS;
 }
 
