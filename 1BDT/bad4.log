@@ -1,0 +1,296 @@
++start
+Temporary breakpoint 3 at 0x402740: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad4 
+
+Temporary breakpoint 3, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x402740
++break bdt_client.c:61
+Breakpoint 4 at 0x402b60: file bdt_client.c, line 61.
++continue
+Continuing.
+
+Breakpoint 4, main () at bdt_client.c:62
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:62:2475:beg:0x402b60
++continue
+Continuing.
+[Inferior 1 (process 16633) exited normally]
++break bdt_client.c:75
+Breakpoint 5 at 0x402d7c: file bdt_client.c, line 75.
++start
+Temporary breakpoint 6 at 0x402740: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad4 
+
+Temporary breakpoint 6, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x402740
++continue
+Continuing.
+
+Breakpoint 4, main () at bdt_client.c:62
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:62:2475:beg:0x402b60
++continue
+Continuing.
+
+Breakpoint 5, main () at bdt_client.c:79
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:79:3208:beg:0x402d7c
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:80:3255:beg:0x402db0
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:81:3304:beg:0x402de4
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:82:3354:beg:0x402e18
++temp = 3
+Undefined command: "temp".  Try "help".
++print BDT_toString()
+$1 = 0x4301c0 "a\na/b\na/b/c\na/b/d\na/b/d/e\na/b/d/e/e\n"
++set temp="3"
++p temp
+$2 = 0x430140 "3"
++set temp = BDT_toString()
++p temp
+$3 = 0x4302a0 "a\na/b\na/b/c\na/b/d\na/b/d/e\na/b/d/e/e\n"
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:83:3405:beg:0x402e4c
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:84:3449:beg:0x402e80
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:85:3494:beg:0x402eb4
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:86:3542:beg:0x402ee8
++p BDT_toString()
+$4 = 0x430220 "p\002Ca\na/b\na/b/c\na/b/d\n"
++continue
+Continuing.
+[Inferior 1 (process 16770) exited normally]
++start
+Temporary breakpoint 7 at 0x402740: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad4 
+
+Temporary breakpoint 7, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x402740
++continue
+Continuing.
+
+Breakpoint 4, main () at bdt_client.c:62
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:62:2475:beg:0x402b60
++continue
+Continuing.
+
+Breakpoint 5, main () at bdt_client.c:79
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:79:3208:beg:0x402d7c
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:80:3255:beg:0x402db0
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:81:3304:beg:0x402de4
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:82:3354:beg:0x402e18
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:83:3405:beg:0x402e4c
++step
+BDT_rmPath (path=0x4038f0 "a/b/d/e") at bdtBad4.c:382
+/u/cos217/Assignment4/bdtBad4.c:382:9496:beg:0x40237c
++next
+/u/cos217/Assignment4/bdtBad4.c:384:9522:beg:0x4023a8
++print BDT_toString()
+$5 = 0x4301c0 "a\na/b\na/b/c\na/b/d\na/b/d/e\na/b/d/e/e\n"
++next
+/u/cos217/Assignment4/bdtBad4.c:387:9580:beg:0x4023c4
++next
+/u/cos217/Assignment4/bdtBad4.c:388:9614:beg:0x4023d0
++print BDT_toString()
+$6 = 0x430280 "a\na/b\na/b/c\na/b/d\na/b/d/e\na/b/d/e/e\n"
++next
+/u/cos217/Assignment4/bdtBad4.c:391:9662:beg:0x4023e4
++step
+BDT_rmPathAt (path=0x4038f0 "a/b/d/e", curr=0x430190) at bdtBad4.c:360
+/u/cos217/Assignment4/bdtBad4.c:360:9047:beg:0x4022b0
++next
+/u/cos217/Assignment4/bdtBad4.c:361:9072:beg:0x4022dc
++next
+/u/cos217/Assignment4/bdtBad4.c:363:9098:beg:0x402308
++next
+/u/cos217/Assignment4/bdtBad4.c:365:9125:beg:0x402314
++print BDT_toString()
+$7 = 0x4302b0 "a\na/b\na/b/c\na/b/d\na/b/d/e\na/b/d/e/e\n"
++next
+/u/cos217/Assignment4/bdtBad4.c:366:9183:beg:0x40232c
++next
+/u/cos217/Assignment4/bdtBad4.c:369:9241:beg:0x402348
++print BDT_toString()
+$8 = 0x4302e0 "a\na/b\na/b/c\na/b/d\na/b/d/e\na/b/d/e/e\n"
++next
+/u/cos217/Assignment4/bdtBad4.c:371:9290:beg:0x402354
++print BDT_toString()
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
+The program being debugged was signaled while in a function called from GDB.
+GDB remains in the frame where the signal was received.
+To change this behavior use "set unwindonsignal on".
+Evaluation of the expression containing the function
+(BDT_toString) will be abandoned.
+When the function is done executing, GDB will silently stop.
++next
+Single stepping until exit from function raise,
+which has no line number information.
+
+Program terminated with signal SIGABRT, Aborted.
+The program no longer exists.
++start
+Temporary breakpoint 8 at 0x402740: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad4 
+
+Temporary breakpoint 8, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x402740
++continue
+Continuing.
+
+Breakpoint 4, main () at bdt_client.c:62
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:62:2475:beg:0x402b60
++continue
+Continuing.
+
+Breakpoint 5, main () at bdt_client.c:79
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:79:3208:beg:0x402d7c
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:80:3255:beg:0x402db0
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:81:3304:beg:0x402de4
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:82:3354:beg:0x402e18
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:83:3405:beg:0x402e4c
++step
+BDT_rmPath (path=0x4038f0 "a/b/d/e") at bdtBad4.c:382
+/u/cos217/Assignment4/bdtBad4.c:382:9496:beg:0x40237c
++next
+/u/cos217/Assignment4/bdtBad4.c:384:9522:beg:0x4023a8
++next
+/u/cos217/Assignment4/bdtBad4.c:387:9580:beg:0x4023c4
++next
+/u/cos217/Assignment4/bdtBad4.c:388:9614:beg:0x4023d0
++next
+/u/cos217/Assignment4/bdtBad4.c:391:9662:beg:0x4023e4
++step
+BDT_rmPathAt (path=0x4038f0 "a/b/d/e", curr=0x430190) at bdtBad4.c:360
+/u/cos217/Assignment4/bdtBad4.c:360:9047:beg:0x4022b0
++next
+/u/cos217/Assignment4/bdtBad4.c:361:9072:beg:0x4022dc
++next
+/u/cos217/Assignment4/bdtBad4.c:363:9098:beg:0x402308
++next
+/u/cos217/Assignment4/bdtBad4.c:365:9125:beg:0x402314
++next
+/u/cos217/Assignment4/bdtBad4.c:366:9183:beg:0x40232c
++next
+/u/cos217/Assignment4/bdtBad4.c:369:9241:beg:0x402348
++next
+/u/cos217/Assignment4/bdtBad4.c:371:9290:beg:0x402354
++print BDT_toString()
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
+The program being debugged was signaled while in a function called from GDB.
+GDB remains in the frame where the signal was received.
+To change this behavior use "set unwindonsignal on".
+Evaluation of the expression containing the function
+(BDT_toString) will be abandoned.
+When the function is done executing, GDB will silently stop.
++next
+Single stepping until exit from function raise,
+which has no line number information.
+
+Program terminated with signal SIGABRT, Aborted.
+The program no longer exists.
++start
+Temporary breakpoint 9 at 0x402740: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad4 
+
+Temporary breakpoint 9, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x402740
++continue
+Continuing.
+
+Breakpoint 4, main () at bdt_client.c:62
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:62:2475:beg:0x402b60
++continue
+Continuing.
+
+Breakpoint 5, main () at bdt_client.c:79
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:79:3208:beg:0x402d7c
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:80:3255:beg:0x402db0
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:81:3304:beg:0x402de4
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:82:3354:beg:0x402e18
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:83:3405:beg:0x402e4c
++step
+BDT_rmPath (path=0x4038f0 "a/b/d/e") at bdtBad4.c:382
+/u/cos217/Assignment4/bdtBad4.c:382:9496:beg:0x40237c
++next
+/u/cos217/Assignment4/bdtBad4.c:384:9522:beg:0x4023a8
++next
+/u/cos217/Assignment4/bdtBad4.c:387:9580:beg:0x4023c4
++next
+/u/cos217/Assignment4/bdtBad4.c:388:9614:beg:0x4023d0
++next
+/u/cos217/Assignment4/bdtBad4.c:391:9662:beg:0x4023e4
++step
+BDT_rmPathAt (path=0x4038f0 "a/b/d/e", curr=0x430190) at bdtBad4.c:360
+/u/cos217/Assignment4/bdtBad4.c:360:9047:beg:0x4022b0
++next
+/u/cos217/Assignment4/bdtBad4.c:361:9072:beg:0x4022dc
++next
+/u/cos217/Assignment4/bdtBad4.c:363:9098:beg:0x402308
++next
+/u/cos217/Assignment4/bdtBad4.c:365:9125:beg:0x402314
++next
+/u/cos217/Assignment4/bdtBad4.c:366:9183:beg:0x40232c
++next
+/u/cos217/Assignment4/bdtBad4.c:369:9241:beg:0x402348
++next
+/u/cos217/Assignment4/bdtBad4.c:371:9290:beg:0x402354
++step
+BDT_removePathFrom (curr=0x430190) at bdtBad4.c:150
+/u/cos217/Assignment4/bdtBad4.c:150:4160:beg:0x401e08
++next
+/u/cos217/Assignment4/bdtBad4.c:151:4182:beg:0x401e14
++next
+/u/cos217/Assignment4/bdtBad4.c:152:4222:beg:0x401e20
++next
+/u/cos217/Assignment4/bdtBad4.c:153:4262:beg:0x401e2c
++next
+/u/cos217/Assignment4/bdtBad4.c:154:4286:beg:0x401e38
++next
+/u/cos217/Assignment4/bdtBad4.c:155:4304:beg:0x401e40
++next
+/u/cos217/Assignment4/bdtBad4.c:157:4324:beg:0x401e5c
++next
+BDT_rmPathAt (path=0x4038f0 "a/b/d/e", curr=0x430190) at bdtBad4.c:372
+/u/cos217/Assignment4/bdtBad4.c:372:9322:beg:0x40235c
++p BDT_toString()
+$9 = 0x430220 "0\001Ca\na/b\na/b/c\na/b/d\n"
++continue
+Continuing.
+[Inferior 1 (process 16912) exited normally]
++start
+Temporary breakpoint 10 at 0x402740: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad4 
+
+Temporary breakpoint 10, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x402740
++continue
+Continuing.
+
+Breakpoint 4, main () at bdt_client.c:62
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:62:2475:beg:0x402b60
++continue
+Continuing.
+
+Breakpoint 5, main () at bdt_client.c:79
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:79:3208:beg:0x402d7c
++continue
+Continuing.
+[Inferior 1 (process 17049) exited normally]
++set logging off

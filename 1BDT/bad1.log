@@ -1,0 +1,329 @@
++run
+Starting program:  
+No executable file specified.
+Use the "file" or "exec-file" command.
++run bdtBad1
+Starting program:  bdtBad1
+No executable file specified.
+Use the "file" or "exec-file" command.
++run ./bdtBad1
+Starting program:  ./bdtBad1
+No executable file specified.
+Use the "file" or "exec-file" command.
++run /bdtbad1
+Starting program:  /bdtbad1
+No executable file specified.
+Use the "file" or "exec-file" command.
++run
+The program being debugged has been started already.
+Start it from the beginning? (y or n) Program not restarted.
++run
+The program being debugged has been started already.
+Start it from the beginning? (y or n) Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad1 
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++next
+Single stepping until exit from function raise,
+which has no line number information.
+
+Program terminated with signal SIGABRT, Aborted.
+The program no longer exists.
++start
+Temporary breakpoint 1 at 0x40272c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad1 
+
+Temporary breakpoint 1, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40272c
++next
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++start
+The program being debugged has been started already.
+Start it from the beginning? (y or n) Program not restarted.
++end
+This command cannot be used at the top level.
++start
+The program being debugged has been started already.
+Start it from the beginning? (y or n) Temporary breakpoint 2 at 0x40272c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad1 
+
+Temporary breakpoint 2, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40272c
++step
+BDT_insertPath (path=0x403620 "a/b/c") at bdtBad1.c:320
+/u/cos217/Assignment4/bdtBad1.c:320:8186:beg:0x402198
++next
+/u/cos217/Assignment4/bdtBad1.c:322:8212:beg:0x4021c4
++next
+/u/cos217/Assignment4/bdtBad1.c:323:8246:beg:0x4021d0
++next
+/u/cos217/Assignment4/bdtBad1.c:324:8290:beg:0x4021dc
++next
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++step
+Single stepping until exit from function raise,
+which has no line number information.
+
+Program terminated with signal SIGABRT, Aborted.
+The program no longer exists.
++start
+Temporary breakpoint 3 at 0x40272c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad1 
+
+Temporary breakpoint 3, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40272c
++next
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++start
+The program being debugged has been started already.
+Start it from the beginning? (y or n) Temporary breakpoint 4 at 0x40272c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad1 
+
+Temporary breakpoint 4, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40272c
++next
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++start
+The program being debugged has been started already.
+Start it from the beginning? (y or n) Temporary breakpoint 5 at 0x40272c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad1 
+
+Temporary breakpoint 5, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40272c
++step
+BDT_insertPath (path=0x403620 "a/b/c") at bdtBad1.c:320
+/u/cos217/Assignment4/bdtBad1.c:320:8186:beg:0x402198
++c
+Continuing.
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++break BDT_insertRestOfParth
+Function "BDT_insertRestOfParth" not defined.
+Make breakpoint pending on future shared library load? (y or [n]) +break BDT_insertRestofPath
+Function "BDT_insertRestofPath" not defined.
+Make breakpoint pending on future shared library load? (y or [n]) +break BDT_insertRestOfPath
+Breakpoint 6 at 0x401fac: file bdtBad1.c, line 237.
++run
+The program being debugged has been started already.
+Start it from the beginning? (y or n) Program not restarted.
++c
+Continuing.
+
+Program terminated with signal SIGABRT, Aborted.
+The program no longer exists.
++run
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad1 
+
+Breakpoint 6, BDT_insertRestOfPath (path=0x403620 "a/b/c", parent=0x0) at bdtBad1.c:237
+/u/cos217/Assignment4/bdtBad1.c:237:6275:beg:0x401fac
++next
+/u/cos217/Assignment4/bdtBad1.c:238:6300:beg:0x401fb4
++next
+/u/cos217/Assignment4/bdtBad1.c:241:6361:beg:0x401fb8
++next
+/u/cos217/Assignment4/bdtBad1.c:245:6422:beg:0x401fc0
++next
+/u/cos217/Assignment4/bdtBad1.c:247:6448:beg:0x401fec
++next
+/u/cos217/Assignment4/bdtBad1.c:248:6470:beg:0x401ff8
++next
+/u/cos217/Assignment4/bdtBad1.c:265:6913:beg:0x402050
++next
+/u/cos217/Assignment4/bdtBad1.c:266:6955:beg:0x402064
++next
+/u/cos217/Assignment4/bdtBad1.c:268:7006:beg:0x402078
++next
+/u/cos217/Assignment4/bdtBad1.c:269:7037:beg:0x402084
++next
+/u/cos217/Assignment4/bdtBad1.c:271:7075:beg:0x402098
++next
+/u/cos217/Assignment4/bdtBad1.c:272:7104:beg:0x40209c
++next
+/u/cos217/Assignment4/bdtBad1.c:277:7284:beg:0x4020ac
++next
+/u/cos217/Assignment4/bdtBad1.c:278:7311:beg:0x4020b8
++next
+/u/cos217/Assignment4/bdtBad1.c:289:7588:beg:0x402100
++next
+/u/cos217/Assignment4/bdtBad1.c:295:7715:beg:0x402124
++next
+/u/cos217/Assignment4/bdtBad1.c:296:7733:beg:0x40212c
++next
+/u/cos217/Assignment4/bdtBad1.c:271:7075:beg:0x402140
++next
+/u/cos217/Assignment4/bdtBad1.c:272:7104:beg:0x40209c
++next
+/u/cos217/Assignment4/bdtBad1.c:277:7284:beg:0x4020ac
++next
+/u/cos217/Assignment4/bdtBad1.c:280:7349:beg:0x4020c4
++next
+/u/cos217/Assignment4/bdtBad1.c:281:7401:beg:0x4020d4
++next
+/u/cos217/Assignment4/bdtBad1.c:289:7588:beg:0x402100
++next
+/u/cos217/Assignment4/bdtBad1.c:295:7715:beg:0x402124
++next
+/u/cos217/Assignment4/bdtBad1.c:296:7733:beg:0x40212c
++next
+/u/cos217/Assignment4/bdtBad1.c:271:7075:beg:0x402140
++next
+/u/cos217/Assignment4/bdtBad1.c:272:7104:beg:0x40209c
++next
+/u/cos217/Assignment4/bdtBad1.c:277:7284:beg:0x4020ac
++next
+/u/cos217/Assignment4/bdtBad1.c:280:7349:beg:0x4020c4
++next
+/u/cos217/Assignment4/bdtBad1.c:281:7401:beg:0x4020d4
++next
+/u/cos217/Assignment4/bdtBad1.c:289:7588:beg:0x402100
++next
+/u/cos217/Assignment4/bdtBad1.c:295:7715:beg:0x402124
++next
+/u/cos217/Assignment4/bdtBad1.c:296:7733:beg:0x40212c
++next
+/u/cos217/Assignment4/bdtBad1.c:271:7075:beg:0x402140
++next
+/u/cos217/Assignment4/bdtBad1.c:299:7775:beg:0x40214c
++next
+/u/cos217/Assignment4/bdtBad1.c:306:7955:beg:0x402154
++next
+/u/cos217/Assignment4/bdtBad1.c:307:7979:beg:0x402160
++next
+/u/cos217/Assignment4/bdtBad1.c:308:8002:beg:0x402170
++next
+/u/cos217/Assignment4/bdtBad1.c:313:8098:beg:0x402184
++next
+BDT_insertPath (path=0x403620 "a/b/c") at bdtBad1.c:324
+/u/cos217/Assignment4/bdtBad1.c:324:8290:beg:0x4021dc
++next
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++p BDT_insertPath
+$1 = {int (char *)} 0x40218c <BDT_insertPath>
++print/d BDT_insertPath
+$2 = Value can't be converted to integer.
++finish
+Run till exit from #0  0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
+
+Program terminated with signal SIGABRT, Aborted.
+The program no longer exists.
++start
+Temporary breakpoint 7 at 0x40272c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad1 
+
+Temporary breakpoint 7, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40272c
++p BDT_insertPath("a/b/c")
+
+Breakpoint 6, BDT_insertRestOfPath (path=0x430010 "a/b/c", parent=0x0) at bdtBad1.c:237
+/u/cos217/Assignment4/bdtBad1.c:237:6275:beg:0x401fac
+The program being debugged stopped while in a function called from GDB.
+Evaluation of the expression containing the function
+(BDT_insertPath) will be abandoned.
+When the function is done executing, GDB will silently stop.
++c
+Continuing.
++c
+Continuing.
+
+Breakpoint 6, BDT_insertRestOfPath (path=0x403620 "a/b/c", parent=0x4300f0) at bdtBad1.c:237
+/u/cos217/Assignment4/bdtBad1.c:237:6275:beg:0x401fac
++c
+Continuing.
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++p BDT_insertPath("a/b/c\")
+Unterminated string in expression.
++p BDT_insertPath("a/b/c")
+
+Breakpoint 6, BDT_insertRestOfPath (path=0x430030 "a/b/c", parent=0x4300f0) at bdtBad1.c:237
+/u/cos217/Assignment4/bdtBad1.c:237:6275:beg:0x401fac
+The program being debugged stopped while in a function called from GDB.
+Evaluation of the expression containing the function
+(BDT_insertPath) will be abandoned.
+When the function is done executing, GDB will silently stop.
++start
+The program being debugged has been started already.
+Start it from the beginning? (y or n) Program not restarted.
++finish
+Run till exit from #0  BDT_insertRestOfPath (path=0x430030 "a/b/c", parent=0x4300f0) at bdtBad1.c:237
+BDT_insertPath (path=0x430030 "a/b/c") at bdtBad1.c:324
+/u/cos217/Assignment4/bdtBad1.c:324:8290:beg:0x4021dc
+Value returned is $3 = 3
++finish
+Run till exit from #0  BDT_insertPath (path=0x430030 "a/b/c") at bdtBad1.c:324
+Value returned is $4 = 3
++quit
+A debugging session is active.
+
+	Inferior 1 [process 14797] will be killed.
+
+Quit anyway? (y or n) Not confirmed.
++set logging off
++start
+Temporary breakpoint 1 at 0x40272c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad1 
+
+Temporary breakpoint 1, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40272c
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-222.sd7.aarch64
++continue
+Continuing.
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++continue
+Continuing.
+
+Program terminated with signal SIGABRT, Aborted.
+The program no longer exists.
++start
+Temporary breakpoint 2 at 0x40272c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad1 
+
+Temporary breakpoint 2, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40272c
++step
+BDT_insertPath (path=0x403620 "a/b/c") at bdtBad1.c:320
+/u/cos217/Assignment4/bdtBad1.c:320:8186:beg:0x402198
++next
+/u/cos217/Assignment4/bdtBad1.c:322:8212:beg:0x4021c4
++next
+/u/cos217/Assignment4/bdtBad1.c:323:8246:beg:0x4021d0
++next
+/u/cos217/Assignment4/bdtBad1.c:324:8290:beg:0x4021dc
++next
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++start
+The program being debugged has been started already.
+Start it from the beginning? (y or n) Program not restarted.
++continue
+Continuing.
+
+Program terminated with signal SIGABRT, Aborted.
+The program no longer exists.
++start
+Temporary breakpoint 3 at 0x40272c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad1 
+
+Temporary breakpoint 3, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40272c
++quit
+A debugging session is active.
+
+	Inferior 1 [process 15144] will be killed.
+
+Quit anyway? (y or n) 

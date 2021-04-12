@@ -1,0 +1,223 @@
++start
+Temporary breakpoint 2 at 0x40274c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad5 
+
+Temporary breakpoint 2, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40274c
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:23:873:beg:0x402780
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:24:919:beg:0x4027b4
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:29:1143:beg:0x4027e8
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:30:1176:beg:0x402814
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:31:1222:beg:0x402848
++next
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++next
+Single stepping until exit from function raise,
+which has no line number information.
+
+Program terminated with signal SIGABRT, Aborted.
+The program no longer exists.
++start
+Temporary breakpoint 3 at 0x40274c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad5 
+
+Temporary breakpoint 3, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40274c
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:23:873:beg:0x402780
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:24:919:beg:0x4027b4
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:29:1143:beg:0x4027e8
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:30:1176:beg:0x402814
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:31:1222:beg:0x402848
++next
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++next
+Single stepping until exit from function raise,
+which has no line number information.
+
+Program terminated with signal SIGABRT, Aborted.
+The program no longer exists.
++start
+Temporary breakpoint 4 at 0x40274c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad5 
+
+Temporary breakpoint 4, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40274c
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:23:873:beg:0x402780
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:24:919:beg:0x4027b4
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:29:1143:beg:0x4027e8
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:30:1176:beg:0x402814
++step
+BDT_containsPath (path=0x403640 "a/b/c") at bdtBad5.c:332
+/u/cos217/Assignment4/bdtBad5.c:332:8440:beg:0x40220c
++next
+/u/cos217/Assignment4/bdtBad5.c:334:8466:beg:0x402238
++next
+/u/cos217/Assignment4/bdtBad5.c:337:8509:beg:0x402254
++next
+/u/cos217/Assignment4/bdtBad5.c:340:8583:beg:0x402260
++next
+/u/cos217/Assignment4/bdtBad5.c:341:8603:beg:0x40226c
++next
+/u/cos217/Assignment4/bdtBad5.c:347:8755:beg:0x402298
++next
+main () at bdt_client.c:31
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:31:1222:beg:0x402848
++next
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++next
+Single stepping until exit from function raise,
+which has no line number information.
+
+Program terminated with signal SIGABRT, Aborted.
+The program no longer exists.
++next
+The program is not being run.
++start
+Temporary breakpoint 5 at 0x40274c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad5 
+
+Temporary breakpoint 5, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40274c
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:23:873:beg:0x402780
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:24:919:beg:0x4027b4
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:29:1143:beg:0x4027e8
++step
+BDT_init () at bdtBad5.c:397
+/u/cos217/Assignment4/bdtBad5.c:397:9757:beg:0x4023f8
++next
+/u/cos217/Assignment4/bdtBad5.c:399:9813:beg:0x402414
++next
+/u/cos217/Assignment4/bdtBad5.c:400:9835:beg:0x402424
++next
+/u/cos217/Assignment4/bdtBad5.c:401:9851:beg:0x402430
++next
+/u/cos217/Assignment4/bdtBad5.c:402:9865:beg:0x40243c
++next
+/u/cos217/Assignment4/bdtBad5.c:403:9884:beg:0x402440
++next
+main () at bdt_client.c:30
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:30:1176:beg:0x402814
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:31:1222:beg:0x402848
++next
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++next
+Single stepping until exit from function raise,
+which has no line number information.
+
+Program terminated with signal SIGABRT, Aborted.
+The program no longer exists.
++start
+Temporary breakpoint 6 at 0x40274c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad5 
+
+Temporary breakpoint 6, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40274c
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:23:873:beg:0x402780
++continue
+Continuing.
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++start
+The program being debugged has been started already.
+Start it from the beginning? (y or n) Program not restarted.
++nest
+Undefined command: "nest".  Try "help".
++next
+Single stepping until exit from function raise,
+which has no line number information.
+
+Program terminated with signal SIGABRT, Aborted.
+The program no longer exists.
++start
+Temporary breakpoint 7 at 0x40274c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad5 
+
+Temporary breakpoint 7, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40274c
++step
+BDT_insertPath (path=0x403640 "a/b/c") at bdtBad5.c:320
+/u/cos217/Assignment4/bdtBad5.c:320:8186:beg:0x402198
++continue
+Continuing.
+
+Program received signal SIGABRT, Aborted.
+0x0000ffffbe5f50e8 in raise () from /lib64/libc.so.6
++next
+Single stepping until exit from function raise,
+which has no line number information.
+
+Program terminated with signal SIGABRT, Aborted.
+The program no longer exists.
++start
+Temporary breakpoint 8 at 0x40274c: file bdt_client.c, line 22.
+Starting program: /u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdtBad5 
+
+Temporary breakpoint 8, main () at bdt_client.c:22
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:22:814:beg:0x40274c
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:23:873:beg:0x402780
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:24:919:beg:0x4027b4
++step
+BDT_toString () at bdtBad5.c:467
+/u/cos217/Assignment4/bdtBad5.c:467:11679:beg:0x402680
++next
+/u/cos217/Assignment4/bdtBad5.c:468:11730:beg:0x402688
++next
+/u/cos217/Assignment4/bdtBad5.c:470:11755:beg:0x40268c
++next
+/u/cos217/Assignment4/bdtBad5.c:471:11777:beg:0x4026a0
++next
+/u/cos217/Assignment4/bdtBad5.c:491:12270:beg:0x40273c
++next
+main () at bdt_client.c:29
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:29:1143:beg:0x4027e8
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:30:1176:beg:0x402814
++next
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/bdt_client.c:31:1222:beg:0x402848
++step
+BDT_toString () at bdtBad5.c:467
+/u/cos217/Assignment4/bdtBad5.c:467:11679:beg:0x402680
++next
+/u/cos217/Assignment4/bdtBad5.c:468:11730:beg:0x402688
++next
+/u/cos217/Assignment4/bdtBad5.c:470:11755:beg:0x40268c
++next
+/u/cos217/Assignment4/bdtBad5.c:473:11797:beg:0x4026a8
++step
+DynArray_new (uLength=1) at dynarray.c:84
+/u/jackieyc/directoryfiletreeproj/My_COS217_A4/1BDT/dynarray.c:84:2239:beg:0x400ab8
++print MIN_PHYS_LENGTH
+$1 = 2
++print uLength
+$2 = 1
++set logging off

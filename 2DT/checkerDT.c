@@ -17,11 +17,31 @@ boolean CheckerDT_Node_isValid(Node_T n) {
    const char* ppath;
    const char* rest;
    size_t i;
+   size_t c;
 
    /* Sample check: a NULL pointer is not a valid node */
    if(n == NULL) {
       fprintf(stderr, "A node is a NULL pointer\n");
       return FALSE;
+   }
+
+   /* Checks if the path in node is initialized*/
+   if(Node_getPath(n) == NULL)
+   {
+      fprintf(stderr, "A node has a NULL path\n");
+      return FALSE;
+   }
+
+   /* Makes sure all children are in alphabetical order*/
+   for(c=1; c < Node_getNumChildren(n); c++)
+   {
+      Node_T oldChild = Node_getChild(n,c-1);
+      Node_T newChild = Node_getChild(n,c);
+      if( Node_compare(oldChild, newChild) > 0)
+      {
+    fprintf(stderr, "A node's children is not in alphabetical order\n");
+    return FALSE;
+      }
    }
 
    parent = Node_getParent(n);
@@ -43,6 +63,14 @@ boolean CheckerDT_Node_isValid(Node_T n) {
          fprintf(stderr, "C's path has grandchild of P's path\n");
          return FALSE;
       }
+
+      /* Checks if rest ends abruptly*/
+      assert(rest != NULL);
+      if(*rest == '\0')
+      {
+         fprintf(stderr, "A node's path does not have enough space\n");
+         return FALSE;
+      }
    }
 
    return TRUE;
@@ -57,7 +85,7 @@ boolean CheckerDT_Node_isValid(Node_T n) {
    parameter list to facilitate constructing your checks.
    If you do, you should update this function comment.
 */
-static boolean CheckerDT_treeCheck(Node_T n) {
+static size_t CheckerDT_treeCheck(Node_T n) {
    size_t c;
 
    if(n != NULL) {
@@ -89,6 +117,13 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
    if(!isInit)
       if(count != 0) {
          fprintf(stderr, "Not initialized, but count is not 0\n");
+         return FALSE;
+      }
+
+   /* Checks if the root is NULL, the count should be zero*/
+   if(root == NULL)
+      if(count != 0){
+         fprintf(stderr, "Root is null, but count is not 0\n");
          return FALSE;
       }
 

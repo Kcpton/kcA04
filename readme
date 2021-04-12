@@ -3,12 +3,12 @@ Assignment 4 readme File
 ------------------------------------------------------------------------
 Student 1: What is your name?
 
-
+Jackie Chen
 
 ------------------------------------------------------------------------
 Student 2: What is your name?
 
-
+Kevin Chen
 
 ------------------------------------------------------------------------
 How many late days are you using on this assignment?
@@ -21,7 +21,14 @@ complete the assignment? COPY THE LIST of authorized sources of
 information given in the "Policies" web page to this section of the
 readme file, and edit it as appropriate.
 
+The course's lectures.
 
+The course's precepts.
+
+The course's website.
+
+Documents that are referenced directly by the course's website.
+Such documents include the course's lecture slides and precept handouts.
 
 ------------------------------------------------------------------------
 Student 2: What authorized sources of information did you use to
@@ -29,7 +36,14 @@ complete the assignment? COPY THE LIST of authorized sources of
 information given in the "Policies" web page to this section of the
 readme file, and edit it as appropriate.
 
+The course's lectures.
 
+The course's precepts.
+
+The course's website.
+
+Documents that are referenced directly by the course's website.
+Such documents include the course's lecture slides and precept handouts.
 
 ------------------------------------------------------------------------
 Student 1: What unauthorized sources of information did you use to
@@ -43,7 +57,7 @@ nature of the interaction, may additionally require the interaction
 being reported to the Committee on Discipline. Write "None" if you used
 no unauthorized sources of information.
 
-
+None
 
 ------------------------------------------------------------------------
 Student 2: What unauthorized sources of information did you use to
@@ -57,7 +71,7 @@ nature of the interaction, may additionally require the interaction
 being reported to the Committee on Discipline. Write "None" if you used
 no unauthorized sources of information.
 
-
+None
 
 ------------------------------------------------------------------------
 Student 1: What is your assessment of the assignment? Was it helpful?
@@ -84,7 +98,19 @@ your disagreements with them? Copy the splint warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
 
+nodeGood.c: (in function Node_hasChild)
+nodeGood.c:172:18: Variable index used before definition
+  An rvalue is used that may not be initialized to a
+  value on some execution path. (Use -usedef to inhibit warning)
+nodeGood.c: (in function Node_unlinkChild)
+nodeGood.c:266:47: Variable i used before definition
+dynarray.c: (in function DynArray_bsearch)
+dynarray.c:428:27: Variable ppvInsert used before definition
 
+These warning are in the nodeGood.c and dynarray.c files, files which
+were provided as part of the assignment. We are not supposed to edit
+them, as such we were unable to fix these warning. They are also part
+of our critque for 2.5
 
 ------------------------------------------------------------------------
 What warnings does critTer generate on checkerDT.c, and what are your
@@ -92,7 +118,16 @@ disagreements with them? Copy the critTer warnings here, and express
 your disagreement after each warning. If there are no warnings, then
 write "None."
 
+Checking checkerDT.c
 
+   a4def.h: line 18: high priority:
+      A comment should appear above each global variable.
+
+critTer caught a small warning because the TRUE and FALSE variables
+in the a4def.h file was not commented. This was code provided by the
+assignment which we were not supposed to edit, and furthermore
+TRUE and FALSE explain themselves with their names. Thus, we decided
+that it was best to leave it as is.
 
 ------------------------------------------------------------------------
 What warnings does splint generate on your Part 3 code, and what are
@@ -120,29 +155,60 @@ the error manifests itself or is "noticed" by the client.
 
       Executable         Function with the underlying error
 ===============================================================
-         ./bdtBad1        
+         ./bdtBad1        BDT_insertPath
 ---------------------------------------------------------------
-         ./bdtBad2        
+         ./bdtBad2        BDT_newNode
 ---------------------------------------------------------------
-         ./bdtBad3        
+         ./bdtBad3        BDT_unlinkParentToChild
 ===============================================================
 
 For bdtBad4, you do not have to find the bug. Instead, indicate what
 is different about trying to debug this executable in gdb versus the
 other three:
 
+In the previous three faulty BDT implementations, there was either
+some bad code which caused a crash or an incorrect linking with
+the tree itself. For this BDT however, the only function with an
+issue was the BDT_toString itself. Thus, the debugging was in a way
+harder, as there wasn't actually anything wrong with the tree, just
+the toString function
 
 
 For bdtBad5, you do not have to find the bug. Instead, indicate one
 hypothesis for how the program could crash within the DynArray module,
 which we promise is itself correct:
 
-
+The issue bdtBad5 is experiencing is that the DynArray has count number
+greater than the actual number of nodes. When the DynArray is created,
+it therefore callocs an extra space which is never assigned anything.
+When the map function is called, the for loop ends up calling that extra
+null space, which in turn causes an error.
 
 ------------------------------------------------------------------------
 What are your critiques of the given DT implementations, as
 specified in Step 2.5?
 
+The interface a4def.h needs better descriptions for the return statuses
+and boolean datatypes.
+The nodeGood.c file still has code which is commented out and unused but
+still in.
+The nodeGood.c has multiple instances of repeating asserts uselessly
+The linkChild and unlinkChild functions are barely used and are
+extremely repetitive. They can be reduced signficantly or completely
+integrated into other functions.
+Multiple lines in dtGood.c that exceed the 72 column length
+The dtGood.c file has a static function DT_traversePath which can be
+replaced by DT_traversePathFrom(path, root).
+For modularity, DT_traversePathFrom does the same fundimental function
+as Node_buildPath.
 
+Each header (.h) file should only #include other header files when
+necessary to understand the contents of the header file itself.
+And each implementation (.c) file should only #include header files
+that define constructs used in that file.
+#include <stdio.h> and <stdlib.h> is not needed in nodeGood.c or
+dtGood.c. <stddef.h> is also already included in their header files
 
+The parameters in nodeGood are inconsistant. Node_create has
+string then node, when every other function has node then string
 ------------------------------------------------------------------------
