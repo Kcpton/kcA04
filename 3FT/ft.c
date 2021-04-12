@@ -376,10 +376,8 @@ void *FT_replaceFileContents(char *path, void *newContents,
    }
    if(File_contains(currentNode, currentPath))
    {
-      void* result = File_getcontents(currentNode, path);
       free(currentPath);
-      File_replace(currentNode, path, newContents);
-      return result;
+      return File_replace(currentNode, path, newContents);
    }
    free(currentPath);
    return NULL;

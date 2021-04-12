@@ -10,6 +10,7 @@
 
 #include "dynarray.h"
 #include "node.h"
+#include "file.h"
 
 struct node {
    /* the full path of this directory */
@@ -110,6 +111,12 @@ size_t Node_getNumChildren(Node_T n) {
    return DynArray_getLength(n->children);
 }
 
+size_t Node_getNumFiles(Node_T n)
+{
+   assert(n != NULL);
+   return DynArray_getLength(n->files);
+}
+
 size_t Node_destroy(Node_T input) {
    size_t i;
    size_t count = 0;
@@ -132,4 +139,8 @@ size_t Node_destroy(Node_T input) {
 }
 
 
+DynArray_T Node_getFiles(Node_T n)
+{
+   return n-> files;
+}
 

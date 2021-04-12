@@ -8,6 +8,7 @@
 
 #include <stddef.h>
 #include "a4def.h"
+#include "dynarray.h"
 
 typedef struct node* Node_T;
 /*
@@ -68,5 +69,7 @@ size_t Node_destroy(Node_T input);
    is in the parent then return 1. Otherwise return 0.
 */
 int Node_contains(Node_T parent, Node_T child);
+
+DynArray_T Node_getFiles(Node_T node);
 
 #endif
