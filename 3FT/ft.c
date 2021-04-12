@@ -25,8 +25,7 @@ int FT_insertDir(char *path)
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   char* currentPath;
-   size_t* loc;
+   size_t* loc = NULL;
    Node_T currentNode = root;
 
    if(!isInitialized)
@@ -86,8 +85,7 @@ boolean FT_containsDir(char *path)
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   char* currentPath;
-   size_t* loc;
+   size_t* loc = NULL;
    Node_T currentNode = root;
 
    if(!isInitialized)
@@ -126,8 +124,7 @@ int FT_rmDir(char *path)
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   char* currentPath;
-   size_t* loc;
+   size_t* loc = NULL;
    Node_T currentNode = root;
 
    if(!isInitialized)
@@ -172,8 +169,7 @@ int FT_insertFile(char *path, void *contents, size_t length)
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   char* currentPath;
-   size_t* loc;
+   size_t* loc = NULL;
    Node_T currentNode = root;
 
    if(!isInitialized)
@@ -200,7 +196,7 @@ int FT_insertFile(char *path, void *contents, size_t length)
          free(currentPath);
          return NOT_A_DIRECTORY;
       }
-      if(Node_getLocation(currentNode, currentPath, loc) == 0;)
+      if(Node_getLocation(currentNode, currentPath, loc) == 0)
       {
          if(Node_addChild(currentNode, currentPath, *loc) != SUCCESS)
          {
@@ -232,8 +228,7 @@ boolean FT_containsFile(char *path)
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   char* currentPath;
-   size_t* loc;
+   size_t* loc = NULL;
    Node_T currentNode = root;
 
    if(!isInitialized)
@@ -271,8 +266,7 @@ int FT_rmFile(char *path){
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   char* currentPath;
-   size_t* loc;
+   size_t* loc = NULL;
    Node_T currentNode = root;
 
    if(!isInitialized)
@@ -315,8 +309,7 @@ void *FT_getFileContents(char *path){
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   char* currentPath;
-   size_t* loc;
+   size_t* loc = NULL;
    Node_T currentNode = root;
 
    if(!isInitialized)
@@ -356,8 +349,7 @@ void *FT_replaceFileContents(char *path, void *newContents,
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   char* currentPath;
-   size_t* loc;
+   size_t* loc = NULL;
    Node_T currentNode = root;
 
    if(!isInitialized)
@@ -398,8 +390,7 @@ int FT_stat(char *path, boolean *type, size_t *length)
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   char* currentPath;
-   size_t* loc;
+   size_t* loc = NULL;
    Node_T currentNode = root;
 
    if(!isInitialized)
@@ -481,7 +472,7 @@ static size_t FT_preOrderTraversal(Node_T n , DynArray_T d,
 
       i++;
       for(c = 0; c < Node_getNumChildren(n); c++)
-         i = DT_preOrderTraversal(Node_getChild(n, c), d, i);
+         i = FT_preOrderTraversal(Node_getChild(n, c), d, f, i);
    }
    return i;
 }
@@ -491,7 +482,7 @@ static size_t FT_preOrderTraversal(Node_T n , DynArray_T d,
    to accumulate a string length, rather than returning the length of
    str, and also always adds one more in addition to str's length.
 */
-static void DT_strlenAccumulate(char* str, size_t* pAcc) {
+static void FT_strlenAccumulate(char* str, size_t* pAcc) {
    assert(pAcc != NULL);
 
    if(str != NULL)
@@ -503,7 +494,7 @@ static void DT_strlenAccumulate(char* str, size_t* pAcc) {
    order, appending str onto acc, and also always adds a newline at
    the end of the concatenated string.
 */
-static void DT_strcatAccumulate(char* str, char* acc) {
+static void FT_strcatAccumulate(char* str, char* acc) {
    assert(acc != NULL);
 
    if(str != NULL)
@@ -523,13 +514,13 @@ char *FT_toString(void)
    directories = DynArray_new(0);
    files = DynArray_new(0);
 
-   (void) DT_preOrderTraversal(root, directories, files, 0);
+   (void) FT_preOrderTraversal(root, directories, files, 0);
 
    DynArray_map(directories,
-                (void (*)(void*, void*)) DT_strlenAccumulate,
+                (void (*)(void*, void*)) FT_strlenAccumulate,
                 (void*) &totalStrlen);
    DynArray_map(files,
-                (void (*)(void*, void*)) DT_strlenAccumulate,
+                (void (*)(void*, void*)) FT_strlenAccumulate,
                 (void*) &totalStrlen);
 
    result = malloc(totalStrlen);
@@ -542,10 +533,10 @@ char *FT_toString(void)
    *result = '\0';
 
    DynArray_map(directories,
-                (void (*)(void*, void*)) DT_strcatAccumulate,
+                (void (*)(void*, void*)) FT_strcatAccumulate,
                 (void*) result);
    DynArray_map(files,
-                (void (*)(void*, void*)) DT_strcatAccumulate,
+                (void (*)(void*, void*)) FT_strcatAccumulate,
                 (void*) result);
 
    DynArray_free(directories);
