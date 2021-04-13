@@ -653,6 +653,8 @@ char *FT_toString(void)
    if(!isInitialized)
       return NULL;
 
+   if(root == NULL)
+      return ""; 
    directories = DynArray_new(0);
    files = DynArray_new(0);
 
