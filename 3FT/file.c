@@ -159,3 +159,7 @@ void File_freeAll(Node_T inNode) {
    DynArray_free(Node_getFiles(inNode));
 }
 
+size_t File_getLength(Node_T inNode, char* path) {
+   File_T outFile = File_getFile(inNode, path);
+   return outFile->len;
+}
