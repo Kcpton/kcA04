@@ -654,7 +654,7 @@ char *FT_toString(void)
       return NULL;
 
    if(root == NULL)
-      return "apple"; 
+      return "\0"; 
    directories = DynArray_new(0);
    files = DynArray_new(0);
 
