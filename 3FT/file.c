@@ -31,6 +31,11 @@ static File_T File_new(char* path, void* contents) {
    return output;
 }
 
+static void File_destory(File_T input)  {
+   free(input->path);
+   free(input);
+}
+
 
 /*
   Node_compare compares file1 and file2 based on their paths.
@@ -154,7 +159,3 @@ void File_freeAll(Node_T inNode) {
    DynArray_free(Node_getFiles(inNode));
 }
 
-static void File_destory(File_T input)  {
-   free(input->path);
-   free(input);
-}
