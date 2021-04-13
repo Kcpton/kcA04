@@ -610,10 +610,7 @@ static size_t FT_preOrderTraversal(Node_T n , DynArray_T d,
    assert(d != NULL);
 
    if(n != NULL) {
-      if(i == 0)
-         (void) DynArray_add(d, Node_getPath(n));
-      else
-         (void) DynArray_set(d, i, Node_getPath(n));
+      (void) DynArray_add(d, Node_getPath(n));
 
       for(c = 0; c < Node_getNumFiles(n); c++)
          (void) DynArray_add(f, File_getFileName(n, c));
