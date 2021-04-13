@@ -45,10 +45,13 @@ int File_insert(Node_T inNode, char* path, void* contents)  {
    size_t loc;
    
    File_T newFile;
-   if(DynArray_bsearch(Node_getFiles(inNode), path, &loc,
+   File_T tempFile = File_new(path, NULL);
+   if(DynArray_bsearch(Node_getFiles(inNode), tempFile, &loc,
                (int (*)(const void*, const void*)) File_compare)) {
+      File_destory(tempFile);
       return ALREADY_IN_TREE;
    }
+   File_destory(tempFile);
    newFile = File_new(path, contents);
    if(newFile == NULL) {
       return MEMORY_ERROR;
@@ -62,11 +65,13 @@ int File_insert(Node_T inNode, char* path, void* contents)  {
 
 int File_contains(Node_T inNode, char* path) {
    size_t loc;
-   
-   if(DynArray_bsearch(Node_getFiles(inNode), path, &loc,
+   File_T tempFile = File_new(path, NULL);
+   if(DynArray_bsearch(Node_getFiles(inNode), tempFile, &loc,
                        (int (*)(const void*, const void*)) File_compare)) {
+      File_destory(tempFile);
       return TRUE;
    }
+   File_destory(tempFile);
    return FALSE;
 }
 
@@ -77,9 +82,10 @@ int File_contains(Node_T inNode, char* path) {
 */
 static File_T File_getFile(Node_T inNode, char* path) {
    size_t loc;
-   
-   int exist = DynArray_bsearch(Node_getFiles(inNode), path, &loc,
+   File_T tempFile = File_new(path, NULL);
+   int exist = DynArray_bsearch(Node_getFiles(inNode), tempFile, &loc,
                                 (int (*)(const void*, const void*)) File_compare);
+   File_destory(tempFile);
    File_T outFile;
    if (exist == 0) {
       return NULL;
@@ -124,16 +130,11 @@ size_t File_getNumFiles(Node_T inNode, char* path) {
 
 int File_rmFile(Node_T inNode, char* path){
    size_t loc;
+   File_T tempFile = File_new(path, NULL);
    int exist = DynArray_bsearch(Node_getFiles(inNode), path, &loc,
                                 (int (*)(const void*, const void*)) File_compare);
+   File_destory(tempFile);
    File_T outFile;
-   if (!exist) {
-      if(DynArray_bsearch(Node_getFiles(inNode), path, &loc,
-                          (int (*)(const void*, const void*)) File_compare)) {
-         return NOT_A_FILE;
-      }
-      return NO_SUCH_PATH;
-   }
    outFile = DynArray_removeAt(Node_getFiles(inNode), loc);
    free(outFile->path);
    free(outFile);
@@ -151,4 +152,9 @@ void File_freeAll(Node_T inNode) {
       free(tempFile);
    }
    DynArray_free(Node_getFiles(inNode));
+}
+
+static void File_destory(File_T input)  {
+   free(input->path);
+   free(input);
 }
