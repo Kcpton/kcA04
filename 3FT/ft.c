@@ -653,8 +653,8 @@ char *FT_toString(void)
    if(!isInitialized)
       return NULL;
 
-   directories = DynArray_new(5);
-   files = DynArray_new(5);
+   directories = DynArray_new(0);
+   files = DynArray_new(0);
 
    (void) FT_preOrderTraversal(root, directories, files, 0);
 
