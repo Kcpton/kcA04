@@ -542,9 +542,6 @@ int FT_stat(char *path, boolean *type, size_t *length)
    assert(currentPath != NULL);
    assert(copyPath != NULL);
    strcpy(copyPath, path);
-   currentTok = strtok(copyPath, "/");
-   nextTok = strtok(NULL, "/");
-   strcpy(currentPath, currentTok);
    while(nextTok != NULL)
    {
       if(!Node_getLocation(currentNode, currentPath, &loc)){
