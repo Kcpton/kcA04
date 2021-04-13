@@ -46,7 +46,7 @@ int FT_insertDir(char *path)
    if(root == NULL)
    {
       root = Node_new(currentPath);
-      Node_addChild(currentNode, currentPath, 0);
+      Node_addChild(root, currentPath, 0);
       currentTok = nextTok;
       if(currentTok == NULL)
       {
