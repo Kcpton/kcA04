@@ -557,7 +557,7 @@ int FT_stat(char *path, boolean *type, size_t *length)
    if(File_contains(currentNode, currentPath))
    {
       *type = TRUE;
-      *length = sizeof(File_getcontents(currentNode, path));
+      *length = sizeof(*File_getcontents(currentNode, path));
       free(currentPath);
       free(copyPath);
       return SUCCESS;
