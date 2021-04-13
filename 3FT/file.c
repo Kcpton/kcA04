@@ -135,7 +135,7 @@ size_t File_getNumFiles(Node_T inNode, char* path) {
 int File_rmFile(Node_T inNode, char* path){
    size_t loc;
    File_T tempFile = File_new(path, NULL);
-   DynArray_bsearch(Node_getFiles(inNode), path, &loc,
+   DynArray_bsearch(Node_getFiles(inNode), tempFile, &loc,
                                 (int (*)(const void*, const void*)) File_compare);
    File_destory(tempFile);
    (void)DynArray_removeAt(Node_getFiles(inNode), loc);
