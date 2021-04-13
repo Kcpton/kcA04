@@ -9,6 +9,7 @@
 #include <stdio.h>
 
 #include "node.h"
+#include "file.h"
 
 struct node {
    /* the full path of this directory */
@@ -132,7 +133,6 @@ size_t Node_destroy(Node_T input) {
       tempNode = DynArray_get(input->children, i);
       count += Node_destroy(tempNode);
    }
-
    DynArray_free(input->children);
    free(input->path);
    free(input);

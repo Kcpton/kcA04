@@ -21,7 +21,7 @@ dynarray.o: dynarray.c dynarray.h
 ft_client.o: ft_client.c ft.h node.h file.h dynarray.h a4def.h
 	gcc217 -g -c ft_client.c
 
-node.o: node.c node.h dynarray.h a4def.h
+node.o: node.c node.h dynarray.h a4def.h file.h
 	gcc217 -g -c node.c
 
 file.o: file.c node.c file.h node.h dynarray.h a4def.h
