@@ -11,7 +11,6 @@ Allows files to be inserted into the tree as well
 #include <string.h>
 #include <stdlib.h>
 #include "ft.h"
-#include "dynarray.h"
 #include "file.h"
 #include "node.h"
 
@@ -25,43 +24,69 @@ int FT_insertDir(char *path)
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   size_t* loc = NULL;
+   char* copyPath;
+   size_t loc;
+
    Node_T currentNode = root;
 
    if(!isInitialized)
       return INITIALIZATION_ERROR;
 
    assert(path != NULL);
-   currentPath = (char*) malloc(strlen(path) + 1);
+   currentPath =  malloc(strlen(path) + 1);
+   copyPath = malloc(strlen(path) + 1);
 
-   if(currentPath == NULL)
+   if(currentPath == NULL || copyPath == NULL)
       return MEMORY_ERROR;
 
-   currentTok = strtok(path, "/");
+   strcpy(copyPath, path);
+   currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
-   strcat(currentPath, currentTok);
-   if(strcmp(Node_getPath(root),currentPath) != 0)
+   strcpy(currentPath, currentTok);
+
+   if(root == NULL)
    {
+      root = Node_new(currentPath);
+      currentTok = nextTok;
+      if(currentTok == NULL)
+      {
+         free(copyPath);
+         free(currentPath);
+         return SUCCESS;
+      }
+      nextTok = strtok(NULL, "/");
+      strcat(currentPath, "/");
+      strcat(currentPath, currentTok);
+   }
+
+   else if(strcmp(Node_getPath(root),currentPath) != 0)
+   {
+      free(copyPath);
       free(currentPath);
       return CONFLICTING_PATH;
    }
-
+   currentNode = root;
+   strcat(currentPath, "/");
+   strcat(currentPath, nextTok);
+   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
       if(File_contains(currentNode, currentPath))
       {
+         free(copyPath);
          free(currentPath);
          return NOT_A_DIRECTORY;
       }
-      if(Node_getLocation(currentNode, currentPath, loc) == 0)
+      if(Node_getLocation(currentNode, currentPath, &loc) == 0)
       {
-         if(Node_addChild(currentNode, currentPath, *loc) != SUCCESS)
+         if(Node_addChild(currentNode, currentPath, loc) != SUCCESS)
          {
+            free(copyPath);
             free(currentPath);
             return MEMORY_ERROR;
          }
       }
-      currentNode = Node_getChild(currentNode, *loc);
+      currentNode = Node_getChild(currentNode, loc);
       currentTok = nextTok;
       nextTok = strtok(NULL, "/");
       strcat(currentPath, "/");
@@ -69,15 +94,19 @@ int FT_insertDir(char *path)
    }
    if(File_contains(currentNode, currentPath))
    {
+      free(copyPath);
       free(currentPath);
       return ALREADY_IN_TREE;
    }
-   if(Node_getLocation(currentNode, currentPath, loc))
+   if(Node_getLocation(currentNode, currentPath, &loc))
    {
+      free(copyPath);
       free(currentPath);
       return ALREADY_IN_TREE;
    }
-   return Node_addChild(currentNode, currentPath, *loc);
+   free(copyPath);
+   free(currentPath);
+   return Node_addChild(currentNode, path, loc);
 }
 
 boolean FT_containsDir(char *path)
@@ -85,36 +114,53 @@ boolean FT_containsDir(char *path)
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   size_t* loc = NULL;
+   char* copyPath;
+   size_t loc;
    Node_T currentNode = root;
 
    if(!isInitialized)
       return FALSE;
 
-   assert(path != NULL);
+   if(root == NULL)
+      return FALSE;
 
-   currentPath = (char*) malloc(strlen(path) + 1);
+   assert(path != NULL);
+   if(strcmp(Node_getPath(root), path) == 0)
+      return TRUE;
+
+   currentPath = malloc(strlen(path) + 1);
+   copyPath = malloc(strlen(path) + 1);
+
+   assert(copyPath != NULL);
    assert(currentPath != NULL);
-   currentTok = strtok(path, "/");
+
+   strcpy(copyPath, path);
+   currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
-   strcat(currentPath, currentTok);
+   strcpy(currentPath, currentTok);
+   strcat(currentPath, "/");
+   strcat(currentPath, nextTok);
+   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
-      if(!Node_getLocation(currentNode, currentPath, loc)){
+      if(!Node_getLocation(currentNode, currentPath, &loc)){
+         free(copyPath);
          free(currentPath);
          return FALSE;
       }
-      currentNode = Node_getChild(currentNode, *loc);
+      currentNode = Node_getChild(currentNode, loc);
       currentTok = nextTok;
       nextTok = strtok(NULL, "/");
       strcat(currentPath, "/");
       strcat(currentPath, currentTok);
    }
-   if(!Node_getLocation(currentNode, currentPath, loc))
+   if(!Node_getLocation(currentNode, currentPath, &loc))
    {
+      free(copyPath);
       free(currentPath);
       return FALSE;
    }
+   free(copyPath);
    free(currentPath);
    return TRUE;
 }
@@ -124,42 +170,63 @@ int FT_rmDir(char *path)
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   size_t* loc = NULL;
+   char* copyPath;
+   size_t loc;
    Node_T currentNode = root;
 
    if(!isInitialized)
-      return FALSE;
+      return INITIALIZATION_ERROR;
 
    assert(path != NULL);
+   if(root == NULL)
+      return NO_SUCH_PATH;
 
-   currentPath = (char*) malloc(strlen(path) + 1);
+   if(strcmp(Node_getPath(root), path) == 0)
+   {
+      Node_destroy(root);
+      return SUCCESS;
+   }
+
+
+   currentPath =  malloc(strlen(path) + 1);
+   copyPath = malloc(strlen(path) + 1);
    assert(currentPath != NULL);
-   currentTok = strtok(path, "/");
+   assert(copyPath != NULL);
+
+   strcpy(copyPath, path);
+   currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
-   strcat(currentPath, currentTok);
+   strcpy(currentPath, currentTok);
+   strcat(currentPath, "/");
+   strcat(currentPath, nextTok);
+   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
-      if(!Node_getLocation(currentNode, currentPath, loc)){
+      if(!Node_getLocation(currentNode, currentPath, &loc)){
+         free(copyPath);
          free(currentPath);
          return NO_SUCH_PATH;
       }
-      currentNode = Node_getChild(currentNode, *loc);
+      currentNode = Node_getChild(currentNode, loc);
       currentTok = nextTok;
       nextTok = strtok(NULL, "/");
       strcat(currentPath, "/");
       strcat(currentPath, currentTok);
    }
-   if(Node_getLocation(currentNode, currentPath, loc))
+   if(Node_getLocation(currentNode, currentPath, &loc))
    {
-      currentNode = Node_getChild(currentNode, *loc);
+      currentNode = Node_getChild(currentNode, loc);
       Node_destroy(currentNode);
+      free(copyPath);
       free(currentPath);
       return SUCCESS;
    }
    if(File_contains(currentNode, currentPath)){
+      free(copyPath);
       free(currentPath);
       return NOT_A_DIRECTORY;
    }
+   free(copyPath);
    free(currentPath);
    return NO_SUCH_PATH;
 }
@@ -169,42 +236,66 @@ int FT_insertFile(char *path, void *contents, size_t length)
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   size_t* loc = NULL;
+   char* copyPath;
+   size_t loc;
    Node_T currentNode = root;
 
    if(!isInitialized)
       return INITIALIZATION_ERROR;
 
    assert(path != NULL);
-   currentPath = (char*) malloc(strlen(path) + 1);
+   currentPath =  malloc(strlen(path) + 1);
+   copyPath = malloc(strlen(path) + 1);
 
-   if(currentPath == NULL)
+   if(currentPath == NULL || copyPath == NULL)
       return MEMORY_ERROR;
 
-   currentTok = strtok(path, "/");
+   strcpy(copyPath, path);
+   currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
-   strcat(currentPath, currentTok);
-   if(strcmp(Node_getPath(root),currentPath) != 0)
+   strcpy(currentPath, currentTok);
+
+   if(root == NULL)
    {
+      if(nextTok == NULL)
+      {
+         free(copyPath);
+         free(currentPath);
+         return CONFLICTING_PATH;
+      }
+      root = Node_new(currentPath);
+      currentTok = nextTok;
+
+      nextTok = strtok(NULL, "/");
+      strcat(currentPath, "/");
+      strcat(currentPath, currentTok);
+   }
+
+   else if (strcmp(Node_getPath(root),currentPath) != 0)
+   {
+      free(copyPath);
       free(currentPath);
       return CONFLICTING_PATH;
    }
+   
    while(nextTok != NULL)
    {
       if(File_contains(currentNode, currentPath))
       {
+         free(copyPath);
          free(currentPath);
          return NOT_A_DIRECTORY;
       }
-      if(Node_getLocation(currentNode, currentPath, loc) == 0)
+      if(Node_getLocation(currentNode, currentPath, &loc) == 0)
       {
-         if(Node_addChild(currentNode, currentPath, *loc) != SUCCESS)
+         if(Node_addChild(currentNode, currentPath, loc) != SUCCESS)
          {
+            free(copyPath);
             free(currentPath);
             return MEMORY_ERROR;
          }
       }
-      currentNode = Node_getChild(currentNode, *loc);
+      currentNode = Node_getChild(currentNode, loc);
       currentTok = nextTok;
       nextTok = strtok(NULL, "/");
       strcat(currentPath, "/");
@@ -212,15 +303,19 @@ int FT_insertFile(char *path, void *contents, size_t length)
    }
    if(File_contains(currentNode, currentPath))
    {
+      free(copyPath);
       free(currentPath);
       return ALREADY_IN_TREE;
    }
-   if(Node_getLocation(currentNode, currentPath, loc))
+   if(Node_getLocation(currentNode, currentPath, &loc))
    {
+      free(copyPath);
       free(currentPath);
       return ALREADY_IN_TREE;
    }
-   return File_insert(currentNode, currentPath, contents);
+   free(copyPath);
+   free(currentPath);
+   return File_insert(currentNode, path, contents);
 }
 
 boolean FT_containsFile(char *path)
@@ -228,26 +323,40 @@ boolean FT_containsFile(char *path)
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   size_t* loc = NULL;
+   char* copyPath;
+   size_t loc;
    Node_T currentNode = root;
 
    if(!isInitialized)
       return FALSE;
 
    assert(path != NULL);
+   if(root == NULL)
+      return FALSE;
 
-   currentPath = (char*) malloc(strlen(path) + 1);
+   if(strcmp(Node_getPath(root), path) == 0)
+      return FALSE;
+
+   currentPath =  malloc(strlen(path) + 1);
+   copyPath = malloc(strlen(path) + 1);
+   assert(copyPath != NULL);
    assert(currentPath != NULL);
-   currentTok = strtok(path, "/");
+
+   strcpy(copyPath, path);
+   currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
-   strcat(currentPath, currentTok);
+   strcpy(currentPath, currentTok);
+   strcat(currentPath, "/");
+   strcat(currentPath, nextTok);
+   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
-      if(!Node_getLocation(currentNode, currentPath, loc)){
+      if(!Node_getLocation(currentNode, currentPath, &loc)){
+         free(copyPath);
          free(currentPath);
          return FALSE;
       }
-      currentNode = Node_getChild(currentNode, *loc);
+      currentNode = Node_getChild(currentNode, loc);
       currentTok = nextTok;
       nextTok = strtok(NULL, "/");
       strcat(currentPath, "/");
@@ -255,9 +364,11 @@ boolean FT_containsFile(char *path)
    }
    if(File_contains(currentNode, currentPath))
    {
+      free(copyPath);
       free(currentPath);
       return TRUE;
    }
+   free(copyPath);
    free(currentPath);
    return FALSE;
 }
@@ -266,26 +377,40 @@ int FT_rmFile(char *path){
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   size_t* loc = NULL;
+   char* copyPath;
+   size_t loc;
    Node_T currentNode = root;
 
    if(!isInitialized)
-      return FALSE;
+      return INITIALIZATION_ERROR;
 
    assert(path != NULL);
+   if(root == NULL)
+      return NO_SUCH_PATH;
 
-   currentPath = (char*) malloc(strlen(path) + 1);
+   if(strcmp(Node_getPath(root),path) == 0)
+      return NOT_A_FILE;
+
+   currentPath =  malloc(strlen(path) + 1);
+   copyPath = malloc(strlen(path) + 1);
    assert(currentPath != NULL);
-   currentTok = strtok(path, "/");
+   assert(copyPath != NULL);
+
+   strcpy(copyPath, path);
+   currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
-   strcat(currentPath, currentTok);
+   strcpy(currentPath, currentTok);
+   strcat(currentPath, "/");
+   strcat(currentPath, nextTok);
+   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
-      if(!Node_getLocation(currentNode, currentPath, loc)){
+      if(!Node_getLocation(currentNode, currentPath, &loc)){
+         free(copyPath);
          free(currentPath);
          return NO_SUCH_PATH;
       }
-      currentNode = Node_getChild(currentNode, *loc);
+      currentNode = Node_getChild(currentNode, loc);
       currentTok = nextTok;
       nextTok = strtok(NULL, "/");
       strcat(currentPath, "/");
@@ -294,14 +419,17 @@ int FT_rmFile(char *path){
    if(File_contains(currentNode, currentPath))
    {
       File_rmFile(currentNode, currentPath);
+      free(copyPath);
       free(currentPath);
       return SUCCESS;
    }
-   if(Node_getLocation(currentNode, currentPath, loc)){
+   if(Node_getLocation(currentNode, currentPath, &loc)){
       free(currentPath);
+      free(copyPath);
       return NOT_A_FILE;
    }
    free(currentPath);
+   free(copyPath);
    return NO_SUCH_PATH;
 }
 
@@ -309,7 +437,8 @@ void *FT_getFileContents(char *path){
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   size_t* loc = NULL;
+   char* copyPath;
+   size_t loc;
    Node_T currentNode = root;
 
    if(!isInitialized)
@@ -317,18 +446,28 @@ void *FT_getFileContents(char *path){
 
    assert(path != NULL);
 
-   currentPath = (char*) malloc(strlen(path) + 1);
+   if(root == NULL)
+      return NULL;
+
+   currentPath =  malloc(strlen(path) + 1);
+   copyPath = malloc(strlen(path) + 1);
    assert(currentPath != NULL);
-   currentTok = strtok(path, "/");
+   assert(copyPath != NULL);
+   strcpy(copyPath, path);
+   currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
-   strcat(currentPath, currentTok);
+   strcpy(currentPath, currentTok);
+   strcat(currentPath, "/");
+   strcat(currentPath, nextTok);
+   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
-      if(!Node_getLocation(currentNode, currentPath, loc)){
+      if(!Node_getLocation(currentNode, currentPath, &loc)){
+         free(copyPath);
          free(currentPath);
          return NULL;
       }
-      currentNode = Node_getChild(currentNode, *loc);
+      currentNode = Node_getChild(currentNode, loc);
       currentTok = nextTok;
       nextTok = strtok(NULL, "/");
       strcat(currentPath, "/");
@@ -337,9 +476,11 @@ void *FT_getFileContents(char *path){
    if(File_contains(currentNode, currentPath))
    {
       free(currentPath);
+      free(copyPath);
       return File_getcontents(currentNode, path);
    }
    free(currentPath);
+   free(copyPath);
    return NULL;
 }
 
@@ -349,26 +490,36 @@ void *FT_replaceFileContents(char *path, void *newContents,
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   size_t* loc = NULL;
+   char* copyPath;
+   size_t loc;
    Node_T currentNode = root;
 
    if(!isInitialized)
       return NULL;
 
    assert(path != NULL);
+   if(root == NULL)
+      return NULL;
 
-   currentPath = (char*) malloc(strlen(path) + 1);
+   currentPath =  malloc(strlen(path) + 1);
+   copyPath = malloc(strlen(path) + 1);
    assert(currentPath != NULL);
-   currentTok = strtok(path, "/");
+   assert(copyPath != NULL);
+   strcpy(copyPath, path);
+   currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
-   strcat(currentPath, currentTok);
+   strcpy(currentPath, currentTok);
+   strcat(currentPath, "/");
+   strcat(currentPath, nextTok);
+   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
-      if(!Node_getLocation(currentNode, currentPath, loc)){
+      if(!Node_getLocation(currentNode, currentPath, &loc)){
+         free(copyPath);
          free(currentPath);
          return NULL;
       }
-      currentNode = Node_getChild(currentNode, *loc);
+      currentNode = Node_getChild(currentNode, loc);
       currentTok = nextTok;
       nextTok = strtok(NULL, "/");
       strcat(currentPath, "/");
@@ -376,10 +527,12 @@ void *FT_replaceFileContents(char *path, void *newContents,
    }
    if(File_contains(currentNode, currentPath))
    {
+      free(copyPath);
       free(currentPath);
       return File_replace(currentNode, path, newContents);
    }
    free(currentPath);
+   free(copyPath);
    return NULL;
 }
 
@@ -388,26 +541,42 @@ int FT_stat(char *path, boolean *type, size_t *length)
    char* currentPath;
    char* currentTok;
    char* nextTok;
-   size_t* loc = NULL;
+   char* copyPath;
+   size_t loc;
    Node_T currentNode = root;
 
    if(!isInitialized)
       return INITIALIZATION_ERROR;
 
    assert(path != NULL);
+   if(root == NULL)
+      return NO_SUCH_PATH;
 
-   currentPath = (char*) malloc(strlen(path) + 1);
+   if(strcmp(Node_getPath(root), path) == 0)
+   {
+      *type = FALSE;
+      return SUCCESS;
+   }
+
+   currentPath =  malloc(strlen(path) + 1);
+   copyPath = malloc(strlen(path) + 1);
    assert(currentPath != NULL);
-   currentTok = strtok(path, "/");
+   assert(copyPath != NULL);
+   strcpy(copyPath, path);
+   currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
-   strcat(currentPath, currentTok);
+   strcpy(currentPath, currentTok);
+   strcat(currentPath, "/");
+   strcat(currentPath, nextTok);
+   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
-      if(!Node_getLocation(currentNode, currentPath, loc)){
+      if(!Node_getLocation(currentNode, currentPath, &loc)){
          free(currentPath);
+         free(copyPath);
          return NO_SUCH_PATH;
       }
-      currentNode = Node_getChild(currentNode, *loc);
+      currentNode = Node_getChild(currentNode, loc);
       currentTok = nextTok;
       nextTok = strtok(NULL, "/");
       strcat(currentPath, "/");
@@ -418,16 +587,19 @@ int FT_stat(char *path, boolean *type, size_t *length)
       *type = TRUE;
       *length = sizeof(File_getcontents(currentNode, path));
       free(currentPath);
+      free(copyPath);
       return SUCCESS;
    }
-   if(Node_getLocation(currentNode, currentPath, loc))
+   if(Node_getLocation(currentNode, currentPath, &loc))
    {
-      currentNode = Node_getChild(currentNode, *loc);
+      currentNode = Node_getChild(currentNode, loc);
       *type = FALSE;
       free(currentPath);
+      free(copyPath);
       return SUCCESS;
    }
    free(currentPath);
+   free(copyPath);
    return NO_SUCH_PATH;
 }
 
