@@ -648,10 +648,17 @@ char *FT_toString(void)
    DynArray_T directories;
    DynArray_T files;
    size_t totalStrlen = 1;
+   Node_T tempNode;
    char* result = NULL;
 
    if(!isInitialized)
       return NULL;
+   if (root == NULL) {
+      return NULL;
+   }
+   else {
+      tempNode = Node_getChild(root, 0);
+   }
 
    directories = DynArray_new(0);
    files = DynArray_new(0);
