@@ -17,19 +17,20 @@
 typedef struct file* File_T;
 
 /*
-   File_insert takes in an inNode, a path and contents and creates
-   a new file with path and contents and insert it into inNode.
-   Return SUCCESS done successfully. Returns ALREADY_IN_TREE if the
-   file is already in the tree. Returns MEMORY_ERROR if there is
-   insufficent space.
+   File_insert takes in an inNode, path, contents, length and creates
+   a new file with path, contents and length, then insert it into 
+   inNode. Return SUCCESS done successfully. Returns ALREADY_IN_TREE 
+   if the file is already in the tree. Returns MEMORY_ERROR if 
+   there is insufficent space.
  */
 int File_insert(Node_T inNode, char* path, void* contents, 
    size_t length);
 
 /*
-   File_replace takes in an inNode, a path and contents, and if the
-   file exist in the node, then it replaces the old content with the
-   new content and returns the old content. If the file doesn't exist
+   File_replace takes in an inNode, a path and contents, and length
+   if the file exist in the node, then it replaces the old content 
+   with the new content and returns the old content. It also replace
+   the the old len with the new length. If the file doesn't exist
    return NULL.
 */
 void* File_replace(Node_T inNode, char* path, void* contents, 
