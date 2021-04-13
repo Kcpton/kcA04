@@ -8,9 +8,7 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include "dynarray.h"
 #include "node.h"
-#include "file.h"
 
 struct node {
    /* the full path of this directory */
@@ -30,7 +28,7 @@ Node_T Node_new(char* path) {
    if (output == NULL) {
       return NULL;
    }
-   output->path = (char*) malloc(strlen(path) + 1);
+   output->path = malloc(strlen(path) + 1);
    if (output->path == NULL) {
       return NULL;
    }
@@ -81,7 +79,7 @@ int Node_getLocation(Node_T input, char* key, size_t *loc) {
    assert(input != NULL);
    assert(key != NULL);
    return DynArray_bsearch(input->children, key, loc,
-                           (int (*)(const void*, const void*)) Node_compare) == 0;
+                           (int (*)(const void*, const void*)) Node_compare);
 }
 
 int Node_addChild(Node_T parent, char* path, size_t loc) {
@@ -143,4 +141,3 @@ DynArray_T Node_getFiles(Node_T n)
 {
    return n-> files;
 }
-
