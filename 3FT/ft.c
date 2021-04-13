@@ -188,9 +188,6 @@ int FT_rmDir(char *path)
    currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
    strcpy(currentPath, currentTok);
-   strcat(currentPath, "/");
-   strcat(currentPath, nextTok);
-   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
       if(!Node_getLocation(currentNode, currentPath, &loc)){
