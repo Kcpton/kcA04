@@ -36,4 +36,6 @@ char* File_toString(Node_T inNode, char* path);
 size_t File_getNumFiles(Node_T inNode, char* path);
 
 void File_freeAll(Node_T inNode);
+
+size_t File_getLength(Node_T inNode, char* path);
 #endif
