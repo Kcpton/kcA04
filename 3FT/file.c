@@ -17,6 +17,11 @@ struct file {
    size_t len;
 };
 
+/*
+   File_new creates a new file based on the path, contents and length.
+   If there is not enough space. Return NULL. Otherwise, return the
+   output.
+*/
 static File_T File_new(char* path, void* contents, size_t length) {
    File_T output;
    output = (File_T) malloc(sizeof(struct file));
@@ -25,6 +30,7 @@ static File_T File_new(char* path, void* contents, size_t length) {
    }
    output->path = (char*) malloc(strlen(path) + 1);
    if(output->path == NULL) {
+      free(output);
       return NULL;
    }
    strcpy(output->path, path);
@@ -66,7 +72,7 @@ int File_insert(Node_T inNode, char* path, void* contents, size_t length)  {
    if(DynArray_addAt(Node_getFiles(inNode), loc, newFile)) {
       return SUCCESS;
    }
-
+   free(newFile);
    return MEMORY_ERROR;
 }
 
@@ -100,11 +106,6 @@ static File_T File_getFile(Node_T inNode, char* path) {
    return DynArray_get(Node_getFiles(inNode), loc);
 }
 
-char* File_toString(Node_T inNode, char* path) {
-   File_T outFile = File_getFile(inNode, path);
-   return outFile->path;
-}
-
 void* File_replace(Node_T inNode, char* path, void* contents, 
    size_t length) {
    File_T outFile = File_getFile(inNode, path);
@@ -122,7 +123,6 @@ void* File_getcontents(Node_T inNode, char* path) {
    File_T outFile = File_getFile(inNode, path);
    return outFile->contents;
 }
-
 
 char* File_getFileName(Node_T inNode, size_t fileID) {
    File_T outfile = DynArray_get(Node_getFiles(inNode), fileID);
@@ -142,10 +142,9 @@ int File_rmFile(Node_T inNode, char* path){
    DynArray_bsearch(Node_getFiles(inNode), tempFile, &loc,
                                 (int (*)(const void*, const void*)) File_compare);
    File_destory(tempFile);
-   (void)DynArray_removeAt(Node_getFiles(inNode), loc);
+   File_destory((File_T) DynArray_removeAt(Node_getFiles(inNode), loc));
    return SUCCESS;
 }
-
 
 void File_freeAll(Node_T inNode) {
    File_T tempFile;
