@@ -138,10 +138,7 @@ int File_rmFile(Node_T inNode, char* path){
    int exist = DynArray_bsearch(Node_getFiles(inNode), path, &loc,
                                 (int (*)(const void*, const void*)) File_compare);
    File_destory(tempFile);
-   File_T outFile;
-   outFile = DynArray_removeAt(Node_getFiles(inNode), loc);
-   free(outFile->path);
-   free(outFile);
+   (void)DynArray_removeAt(Node_getFiles(inNode), loc);
    return SUCCESS;
 }
 
