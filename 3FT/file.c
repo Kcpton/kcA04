@@ -55,7 +55,7 @@ static int File_compare(File_T file1, File_T file2) {
 }
 
 int File_insert(Node_T inNode, char* path, void* contents, size_t length)  {
-   size_t loc;
+   size_t loc = 0;
    
    File_T newFile;
    File_T tempFile = File_new(path, NULL, 0);
@@ -77,7 +77,7 @@ int File_insert(Node_T inNode, char* path, void* contents, size_t length)  {
 }
 
 int File_contains(Node_T inNode, char* path) {
-   size_t loc;
+   size_t loc = 0;
    File_T tempFile = File_new(path, NULL, 0);
    if(DynArray_bsearch(Node_getFiles(inNode), tempFile, &loc,
                        (int (*)(const void*, const void*)) File_compare)) {
@@ -94,7 +94,7 @@ int File_contains(Node_T inNode, char* path) {
     return NULL.
 */
 static File_T File_getFile(Node_T inNode, char* path) {
-   size_t loc;
+   size_t loc = 0;
    File_T tempFile = File_new(path, NULL, 0);
    int exist = DynArray_bsearch(Node_getFiles(inNode), tempFile, &loc,
                                 (int (*)(const void*, const void*)) File_compare);
@@ -137,7 +137,7 @@ size_t File_getNumFiles(Node_T inNode, char* path) {
 }
 
 int File_rmFile(Node_T inNode, char* path){
-   size_t loc;
+   size_t loc = 0;
    File_T tempFile = File_new(path, NULL, 0);
    DynArray_bsearch(Node_getFiles(inNode), tempFile, &loc,
                                 (int (*)(const void*, const void*)) File_compare);

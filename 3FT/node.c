@@ -105,7 +105,7 @@ int Node_getLocation(Node_T input, char* key, size_t *loc) {
    tempNode = Node_new(key);
    output = DynArray_bsearch(input->children, tempNode, loc,
                            (int (*)(const void*, const void*)) Node_compare);
-   Node_destroyhelp(tempNode);
+   (void) Node_destroyhelp(tempNode);
    return output;
 }
 
@@ -120,7 +120,7 @@ int Node_addChild(Node_T parent, char* path, size_t loc) {
       return SUCCESS;
    }
    else {
-      Node_destroyhelp(newNode);
+      (void) Node_destroyhelp(newNode);
       return MEMORY_ERROR;
    }
 }
@@ -149,7 +149,7 @@ size_t Node_destroy(Node_T parent, Node_T input, size_t loc) {
    Node_T tempNode;
 
    assert(input != NULL);
-   DynArray_removeAt(parent->children, loc);
+   (void) DynArray_removeAt(parent->children, loc);
    for(i = 0; i < DynArray_getLength(input->children); i++)
    {
       tempNode = DynArray_get(input->children, i);
