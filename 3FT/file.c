@@ -14,9 +14,10 @@
 struct file {
    char* path;
    void* contents;
+   size_t len;
 };
 
-static File_T File_new(char* path, void* contents) {
+static File_T File_new(char* path, void* contents, size_t length) {
    File_T output;
    output = (File_T) malloc(sizeof(struct file));
    if (output == NULL) {
@@ -28,6 +29,7 @@ static File_T File_new(char* path, void* contents) {
    }
    strcpy(output->path, path);
    output->contents = contents;
+   output->len = length;
    return output;
 }
 
@@ -46,18 +48,18 @@ static int File_compare(File_T file1, File_T file2) {
    return strcmp(file1->path, file2->path);
 }
 
-int File_insert(Node_T inNode, char* path, void* contents)  {
+int File_insert(Node_T inNode, char* path, void* contents, size_t length)  {
    size_t loc;
    
    File_T newFile;
-   File_T tempFile = File_new(path, NULL);
+   File_T tempFile = File_new(path, NULL, 0);
    if(DynArray_bsearch(Node_getFiles(inNode), tempFile, &loc,
                (int (*)(const void*, const void*)) File_compare)) {
       File_destory(tempFile);
       return ALREADY_IN_TREE;
    }
    File_destory(tempFile);
-   newFile = File_new(path, contents);
+   newFile = File_new(path, contents, length);
    if(newFile == NULL) {
       return MEMORY_ERROR;
    }
@@ -70,7 +72,7 @@ int File_insert(Node_T inNode, char* path, void* contents)  {
 
 int File_contains(Node_T inNode, char* path) {
    size_t loc;
-   File_T tempFile = File_new(path, NULL);
+   File_T tempFile = File_new(path, NULL, 0);
    if(DynArray_bsearch(Node_getFiles(inNode), tempFile, &loc,
                        (int (*)(const void*, const void*)) File_compare)) {
       File_destory(tempFile);
@@ -87,7 +89,7 @@ int File_contains(Node_T inNode, char* path) {
 */
 static File_T File_getFile(Node_T inNode, char* path) {
    size_t loc;
-   File_T tempFile = File_new(path, NULL);
+   File_T tempFile = File_new(path, NULL, 0);
    int exist = DynArray_bsearch(Node_getFiles(inNode), tempFile, &loc,
                                 (int (*)(const void*, const void*)) File_compare);
    File_destory(tempFile);
@@ -103,7 +105,8 @@ char* File_toString(Node_T inNode, char* path) {
    return outFile->path;
 }
 
-void* File_replace(Node_T inNode, char* path, void* contents) {
+void* File_replace(Node_T inNode, char* path, void* contents, 
+   size_t length) {
    File_T outFile = File_getFile(inNode, path);
    void* output;
    if(outFile == NULL) {
@@ -111,6 +114,7 @@ void* File_replace(Node_T inNode, char* path, void* contents) {
    }
    output = outFile->contents;
    outFile->contents = contents;
+   outFile->len = length;
    return output;
 }
 
@@ -134,7 +138,7 @@ size_t File_getNumFiles(Node_T inNode, char* path) {
 
 int File_rmFile(Node_T inNode, char* path){
    size_t loc;
-   File_T tempFile = File_new(path, NULL);
+   File_T tempFile = File_new(path, NULL, 0);
    DynArray_bsearch(Node_getFiles(inNode), tempFile, &loc,
                                 (int (*)(const void*, const void*)) File_compare);
    File_destory(tempFile);

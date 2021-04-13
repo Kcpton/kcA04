@@ -303,7 +303,7 @@ int FT_insertFile(char *path, void *contents, size_t length)
    }
    free(copyPath);
    free(currentPath);
-   return File_insert(currentNode, path, contents);
+   return File_insert(currentNode, path, contents, length);
 }
 
 boolean FT_containsFile(char *path)
@@ -505,7 +505,7 @@ void *FT_replaceFileContents(char *path, void *newContents,
    {
       free(copyPath);
       free(currentPath);
-      return File_replace(currentNode, path, newContents);
+      return File_replace(currentNode, path, newContents, newLength);
    }
    free(currentPath);
    free(copyPath);

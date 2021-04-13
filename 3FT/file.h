@@ -17,9 +17,11 @@
 typedef struct file* File_T;
 
 
-int File_insert(Node_T inNode, char* path, void* contents);
+int File_insert(Node_T inNode, char* path, void* contents, 
+   size_t length);
 
-void* File_replace(Node_T inNode, char* path, void* contents);
+void* File_replace(Node_T inNode, char* path, void* contents, 
+   size_t length);
 
 void* File_getcontents(Node_T inNode, char* path);
 
