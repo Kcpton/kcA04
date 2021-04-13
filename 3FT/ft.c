@@ -657,7 +657,7 @@ char *FT_toString(void)
       return "\0";
    }
    else {
-      tempNode = Node_getChild(root, 0);
+      tempNode = Node_getChild(root, 1);
    }
 
    directories = DynArray_new(0);
