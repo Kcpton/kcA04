@@ -654,7 +654,7 @@ char *FT_toString(void)
    if(!isInitialized)
       return NULL;
    if (root == NULL) {
-      return NULL;
+      return "\0";
    }
    else {
       tempNode = Node_getChild(root, 0);
