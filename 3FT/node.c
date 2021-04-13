@@ -142,26 +142,6 @@ size_t Node_getNumFiles(Node_T n)
    return DynArray_getLength(n->files);
 }
 
-size_t Node_destroyhelp(Node_T input) {
-   size_t i;
-   size_t count = 0;
-   Node_T tempNode;
-
-   assert(input != NULL);
-
-   for(i = 0; i < DynArray_getLength(input->children); i++)
-   {
-      tempNode = DynArray_get(input->children, i);
-      count += Node_destroyhelp(tempNode);
-   }
-   DynArray_free(input->children);
-   File_freeAll(input);
-   free(input->path);
-   free(input);
-   count++;
-
-   return count;
-}
 
 size_t Node_destroy(Node_T parent, Node_T input, size_t loc) {
    size_t i;
