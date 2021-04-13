@@ -13,10 +13,12 @@ Allows files to be inserted into the tree as well
 #include "ft.h"
 #include "file.h"
 #include "node.h"
-
+/* A File Tree is an AO with 2 state variables: */
 /* Remember to write some comment here, dumbass*/
 static boolean isInitialized;
 
+/* The root node of the tree. 
+*/
 static Node_T root;
 
 int FT_insertDir(char *path)
