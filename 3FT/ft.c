@@ -175,6 +175,7 @@ int FT_rmDir(char *path)
    if(strcmp(Node_getPath(root), path) == 0)
    {
       Node_destroyhelp(root);
+      root = NULL;
       return SUCCESS;
    }
 
