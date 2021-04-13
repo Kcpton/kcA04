@@ -79,12 +79,6 @@ size_t Node_destroy(Node_T parent, Node_T input, size_t loc);
 size_t Node_destroyhelp(Node_T input);
 
 /*
-   Node_contains take a node parent and a node child. If the child
-   is in the parent then return 1. Otherwise return 0.
-*/
-int Node_contains(Node_T parent, Node_T child);
-
-/*
    Node_getFiles takes in a node input and returns the files
    DynArray_T
 */

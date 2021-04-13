@@ -71,20 +71,6 @@ static int Node_compare(Node_T node1, Node_T node2) {
    return strcmp(node1->path, node2->path);
 }
 
-/* see node.h for specification */
-char* Node_toString(Node_T n) {
-   char* copyPath;
-   assert(n != NULL);
-
-   copyPath = malloc(strlen(n->path)+1);
-   if(copyPath == NULL) {
-      return NULL;
-   }
-   else {
-      return strcpy(copyPath, n->path);
-   }
-}
-
 
 Node_T Node_getChild(Node_T n, size_t childID) {
    assert(n != NULL);
