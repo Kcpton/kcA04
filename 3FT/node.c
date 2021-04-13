@@ -39,6 +39,27 @@ Node_T Node_new(char* path) {
    return output;
 }
 
+size_t Node_destroyhelp(Node_T input) {
+   size_t i;
+   size_t count = 0;
+   Node_T tempNode;
+
+   assert(input != NULL);
+
+   for(i = 0; i < DynArray_getLength(input->children); i++)
+   {
+      tempNode = DynArray_get(input->children, i);
+      count += Node_destroyhelp(tempNode);
+   }
+   DynArray_free(input->children);
+   File_freeAll(input);
+   free(input->path);
+   free(input);
+   count++;
+
+   return count;
+}
+
 /*
   Node_compare compares node1 and node2 based on their paths.
   Returns <0, 0, or >0 if node1 is less than,
