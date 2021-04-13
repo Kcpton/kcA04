@@ -10,6 +10,11 @@
 #include "a4def.h"
 #include "dynarray.h"
 
+/*
+   a Node_T is an object that represents a directory, it also
+   contains a path and references to the node's files and children 
+   directory(if they exist).
+*/
 typedef struct node* Node_T;
 /*
    Node_getLocation takes a Node_T input and looks for a char
