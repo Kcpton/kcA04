@@ -43,10 +43,10 @@ int FT_insertDir(char *path)
    currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
    strcpy(currentPath, currentTok);
-
    if(root == NULL)
    {
       root = Node_new(currentPath);
+      Node_addChild(currentNode, currentTok, 0);
       currentTok = nextTok;
       if(currentTok == NULL)
       {
@@ -66,9 +66,6 @@ int FT_insertDir(char *path)
       return CONFLICTING_PATH;
    }
    currentNode = root;
-   strcat(currentPath, "/");
-   strcat(currentPath, nextTok);
-   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
       if(File_contains(currentNode, currentPath))
@@ -138,9 +135,6 @@ boolean FT_containsDir(char *path)
    currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
    strcpy(currentPath, currentTok);
-   strcat(currentPath, "/");
-   strcat(currentPath, nextTok);
-   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
       if(!Node_getLocation(currentNode, currentPath, &loc)){
@@ -346,9 +340,6 @@ boolean FT_containsFile(char *path)
    currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
    strcpy(currentPath, currentTok);
-   strcat(currentPath, "/");
-   strcat(currentPath, nextTok);
-   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
       if(!Node_getLocation(currentNode, currentPath, &loc)){
@@ -400,9 +391,6 @@ int FT_rmFile(char *path){
    currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
    strcpy(currentPath, currentTok);
-   strcat(currentPath, "/");
-   strcat(currentPath, nextTok);
-   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
       if(!Node_getLocation(currentNode, currentPath, &loc)){
@@ -457,9 +445,6 @@ void *FT_getFileContents(char *path){
    currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
    strcpy(currentPath, currentTok);
-   strcat(currentPath, "/");
-   strcat(currentPath, nextTok);
-   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
       if(!Node_getLocation(currentNode, currentPath, &loc)){
@@ -509,9 +494,6 @@ void *FT_replaceFileContents(char *path, void *newContents,
    currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
    strcpy(currentPath, currentTok);
-   strcat(currentPath, "/");
-   strcat(currentPath, nextTok);
-   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
       if(!Node_getLocation(currentNode, currentPath, &loc)){
@@ -566,9 +548,6 @@ int FT_stat(char *path, boolean *type, size_t *length)
    currentTok = strtok(copyPath, "/");
    nextTok = strtok(NULL, "/");
    strcpy(currentPath, currentTok);
-   strcat(currentPath, "/");
-   strcat(currentPath, nextTok);
-   nextTok = strtok(NULL, "/");
    while(nextTok != NULL)
    {
       if(!Node_getLocation(currentNode, currentPath, &loc)){
