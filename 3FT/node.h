@@ -13,11 +13,11 @@
 typedef struct node* Node_T;
 /*
    Node_getLocation takes a Node_T input and looks for a char
-   key inside of the Node_T and stores the location of where
+   path inside of the Node_T and stores the location of where
    it is/supposed to be. Returns 0 if the Node key is not
    in the location. Otherwise returns 1;
 */
-int Node_getLocation(Node_T input, char* key, size_t *loc);
+int Node_getLocation(Node_T input, char* path, size_t *loc);
 
 /*
    Node_getChild returns the child node of input with
@@ -26,10 +26,10 @@ int Node_getLocation(Node_T input, char* key, size_t *loc);
 Node_T Node_getChild(Node_T input, size_t childID);
 
 /*
-   Node_new takes an input parent node and key and returns
-
+   Node_new takes a path and creates and returns a node with 
+   that path.
 */
-Node_T Node_new(char* key);
+Node_T Node_new(char* path);
 
 /*
    Node_addChild takes a parent Node and a char*. It creates
@@ -59,11 +59,18 @@ size_t Node_getNumChildren(Node_T input);
 size_t Node_getNumFiles(Node_T input);
 
 /*
-   Node_destory takes a input node and frees all the files and
-   Nodes under it. It returns the number of nodes it destorys.
+   Node_destory takes a parent node, an input Node, and size_t
+   loc. It removes the input Node from the parent based on
+   loc and frees the input. It returns the number of nodes it 
+   destorys.
 */
 size_t Node_destroy(Node_T parent, Node_T input, size_t loc);
 
+/*
+   Node_destoryhelp takes a input node and frees and the files
+   and Nodes under it. It returns the number of nodes 
+   that it destorys.
+*/
 size_t Node_destroyhelp(Node_T input);
 
 /*
@@ -72,6 +79,10 @@ size_t Node_destroyhelp(Node_T input);
 */
 int Node_contains(Node_T parent, Node_T child);
 
-DynArray_T Node_getFiles(Node_T node);
+/*
+   Node_getFiles takes in a node input and returns the files
+   DynArray_T
+*/
+DynArray_T Node_getFiles(Node_T input);
 
 #endif
