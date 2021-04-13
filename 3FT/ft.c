@@ -656,7 +656,7 @@ char *FT_toString(void)
    directories = DynArray_new(0);
    files = DynArray_new(0);
 
-   (void) FT_preOrderTraversal(root, directories, files, 0);
+   (void) FT_preOrderTraversal(Node_getChild(root, 0), directories, files, 0);
 
    DynArray_map(directories,
                 (void (*)(void*, void*)) FT_strlenAccumulate,
