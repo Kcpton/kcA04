@@ -78,7 +78,7 @@ Node_T Node_getChild(Node_T n, size_t childID) {
 int Node_getLocation(Node_T input, char* key, size_t *loc) {
    assert(input != NULL);
    assert(key != NULL);
-   return DynArray_search(input->children, key, loc,
+   return DynArray_bsearch(input->children, key, loc,
                            (int (*)(const void*, const void*)) Node_compare);
 }
 
