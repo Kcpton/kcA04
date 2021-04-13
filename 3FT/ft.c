@@ -54,9 +54,6 @@ int FT_insertDir(char *path)
          free(currentPath);
          return SUCCESS;
       }
-      nextTok = strtok(NULL, "/");
-      strcat(currentPath, "/");
-      strcat(currentPath, currentTok);
    }
 
    else if(strcmp(Node_getPath(root),currentPath) != 0)
