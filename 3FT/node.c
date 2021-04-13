@@ -76,10 +76,15 @@ Node_T Node_getChild(Node_T n, size_t childID) {
 }
 
 int Node_getLocation(Node_T input, char* key, size_t *loc) {
+   int output;
+   Node_T tempNode;
    assert(input != NULL);
    assert(key != NULL);
-   return DynArray_bsearch(input->children, key, loc,
+   tempNode = Node_new(key);
+   output = DynArray_bsearch(input->children, tempNode, loc,
                            (int (*)(const void*, const void*)) Node_compare);
+   Node_destroy(tempNode);
+   return output;
 }
 
 int Node_addChild(Node_T parent, char* path, size_t loc) {
