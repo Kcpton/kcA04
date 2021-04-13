@@ -65,7 +65,7 @@ int File_rmFile(Node_T inNode, char* path);
 int File_contains(Node_T inNode, char* path);
 
 /*
-   File_getNumFiles take in an inNode and returns the
+   File_getNumFiles take in an inNode and path. It returns the
    number of files in the inNode.
 */
 size_t File_getNumFiles(Node_T inNode, char* path);
