@@ -91,12 +91,11 @@ static File_T File_getFile(Node_T inNode, char* path) {
    int exist = DynArray_bsearch(Node_getFiles(inNode), tempFile, &loc,
                                 (int (*)(const void*, const void*)) File_compare);
    File_destory(tempFile);
-   File_T outFile;
+   
    if (exist == 0) {
       return NULL;
    }
-   outFile = DynArray_get(Node_getFiles(inNode), loc);
-   return outFile;
+   return DynArray_get(Node_getFiles(inNode), loc);
 }
 
 char* File_toString(Node_T inNode, char* path) {
