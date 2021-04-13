@@ -84,7 +84,7 @@ int Node_getLocation(Node_T input, char* key, size_t *loc) {
    tempNode = Node_new(key);
    output = DynArray_bsearch(input->children, tempNode, loc,
                            (int (*)(const void*, const void*)) Node_compare);
-   Node_destroy(tempNode);
+   Node_destroyhelp(tempNode);
    return output;
 }
 
@@ -99,7 +99,7 @@ int Node_addChild(Node_T parent, char* path, size_t loc) {
       return SUCCESS;
    }
    else {
-      Node_destroy(newNode);
+      Node_destroyhelp(newNode);
       return MEMORY_ERROR;
    }
 }
@@ -121,7 +121,7 @@ size_t Node_getNumFiles(Node_T n)
    return DynArray_getLength(n->files);
 }
 
-size_t Node_destroy(Node_T input) {
+size_t Node_destroyhelp(Node_T input) {
    size_t i;
    size_t count = 0;
    Node_T tempNode;
@@ -131,9 +131,10 @@ size_t Node_destroy(Node_T input) {
    for(i = 0; i < DynArray_getLength(input->children); i++)
    {
       tempNode = DynArray_get(input->children, i);
-      count += Node_destroy(tempNode);
+      count += Node_destroyhelp(tempNode);
    }
    DynArray_free(input->children);
+   File_freeAll(input);
    free(input->path);
    free(input);
    count++;
@@ -141,6 +142,26 @@ size_t Node_destroy(Node_T input) {
    return count;
 }
 
+size_t Node_destroy(Node_T parent, Node_T input, size_t loc) {
+   size_t i;
+   size_t count = 0;
+   Node_T tempNode;
+
+   assert(input != NULL);
+   DynArray_removeAt(parent->children, loc);
+   for(i = 0; i < DynArray_getLength(input->children); i++)
+   {
+      tempNode = DynArray_get(input->children, i);
+      count += Node_destroyhelp(tempNode);
+   }
+   DynArray_free(input->children);
+   File_freeAll(input);
+   free(input->path);
+   free(input);
+   count++;
+
+   return count;
+}
 
 DynArray_T Node_getFiles(Node_T n)
 {

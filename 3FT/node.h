@@ -62,7 +62,7 @@ size_t Node_getNumFiles(Node_T input);
    Node_destory takes a input node and frees all the files and
    Nodes under it. It returns the number of nodes it destorys.
 */
-size_t Node_destroy(Node_T input);
+size_t Node_destroy(Node_T parent, Node_T input, size_t loc);
 
 /*
    Node_contains take a node parent and a node child. If the child

@@ -174,7 +174,7 @@ int FT_rmDir(char *path)
 
    if(strcmp(Node_getPath(root), path) == 0)
    {
-      Node_destroy(root);
+      Node_destroyhelp(root);
       return SUCCESS;
    }
 
@@ -203,8 +203,7 @@ int FT_rmDir(char *path)
    }
    if(Node_getLocation(currentNode, currentPath, &loc))
    {
-      currentNode = Node_getChild(currentNode, loc);
-      Node_destroy(currentNode);
+      Node_destroy(currentNode,Node_getChild(currentNode, loc), loc);
       free(copyPath);
       free(currentPath);
       return SUCCESS;
@@ -589,7 +588,7 @@ int FT_destroy(void)
    if(!isInitialized)
       return INITIALIZATION_ERROR;
    assert(root != NULL);
-   Node_destroy(root);
+   Node_destroyhelp(root);
    root = NULL;
    isInitialized = 0;
    return SUCCESS;
